@@ -38,6 +38,7 @@ def fetch_user_data() -> dict:
         raise Exception("Failed to fetch user data")
     
 
+import os
 @tool
 def get_gas_price(state:str) -> str:
     """
@@ -48,7 +49,7 @@ def get_gas_price(state:str) -> str:
     conn = http.client.HTTPSConnection("api.collectapi.com")
     headers = {
         'content-type': "application/json",
-        'authorization': "apikey 7iY0cH9qu2N1J7SvTZ5Uij:74jWbJjRxv4D7OUgW1jcrg"
+        'authorization': f"apikey {os.getenv('COLLECT_API_KEY')}"
     }
     conn.request("GET", "/gasPrice/stateUsaPrice?state="+state, headers=headers)
     res = conn.getresponse()
@@ -71,7 +72,7 @@ def buy_gas_api(gallons: int, state: str) -> str:
     conn = http.client.HTTPSConnection("api.collectapi.com")
     headers = {
         'content-type': "application/json",
-        'authorization': "apikey 7iY0cH9qu2N1J7SvTZ5Uij:74jWbJjRxv4D7OUgW1jcrg"
+        'authorization': f"apikey {os.getenv('COLLECT_API_KEY')}"
     }
     conn.request("POST", "/gasPrice/buyGas", headers=headers, body={"gallons": gallons, "state": state})
     res = conn.getresponse()
