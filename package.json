@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@jupyterlab/launcher": "^4.4.4"
+  }
+}
